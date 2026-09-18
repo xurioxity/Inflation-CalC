@@ -51,15 +51,14 @@ body {
   font-family: var(--font-body);
   font-size: 1rem;
   line-height: 1.55;
-  /* Soft warm wash under the photo so gaps never flash white */
-background-color: #3a2214;
-background-image: url("./background.png");
-background-size: cover;
-background-position: center center;
-background-repeat: no-repeat;
-background-attachment: fixed;
-}
 
+  background-color: #3a2214;
+  background-image: url("/Inflation-CalC/background.png");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
 /* ---------- Film grain overlay ---------- */
 .grain {
   pointer-events: none;
