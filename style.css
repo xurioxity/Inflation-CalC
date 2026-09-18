@@ -59,23 +59,11 @@ body {
      Default: assets/background.png (already copied for you)
      Swap to any relative path, e.g. url("my-street.jpg")
      ============================================================ */
-  background-image:
-    /* soft dark gradient at bottom for text readability */
-    linear-gradient(
-      to top,
-      rgba(28, 14, 8, 0.88) 0%,
-      rgba(40, 20, 10, 0.45) 28%,
-      rgba(60, 30, 12, 0.18) 55%,
-      rgba(80, 45, 20, 0.08) 100%
-    ),
-    /* faint warm sun wash so the photo stays golden, not grey */
-    linear-gradient(
-      160deg,
-      rgba(212, 140, 40, 0.22) 0%,
-      transparent 45%,
-      rgba(42, 80, 80, 0.12) 100%
-    ),
-    url("background.png");
+    background-image: url("./background.png");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;  background-image: url("./background.png");
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
