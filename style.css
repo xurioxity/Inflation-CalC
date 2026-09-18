@@ -75,7 +75,7 @@ body {
       transparent 45%,
       rgba(42, 80, 80, 0.12) 100%
     ),
-    url("assets/background.png");
+    url("background.png");
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
