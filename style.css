@@ -52,22 +52,12 @@ body {
   font-size: 1rem;
   line-height: 1.55;
   /* Soft warm wash under the photo so gaps never flash white */
-  background-color: #3a2214;
-
-  /* ============================================================
-     BACKGROUND IMAGE — plug your path in here
-     Default: assets/background.png (already copied for you)
-     Swap to any relative path, e.g. url("my-street.jpg")
-     ============================================================ */
-    background-image: url("./background.png");
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;  background-image: url("./background.png");
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+background-color: #3a2214;
+background-image: url("./background.png");
+background-size: cover;
+background-position: center center;
+background-repeat: no-repeat;
+background-attachment: fixed;
 }
 
 /* ---------- Film grain overlay ---------- */
