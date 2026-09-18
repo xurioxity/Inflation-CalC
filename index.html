@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inflation Time Machine</title>
+  <meta name="description" content="A nostalgic look at what your childhood pocket money is worth today — and what ₹100 might become by the time you turn 40." />
+
+  <!-- Retro cinema-poster + typewriter fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Special+Elite&family=Yeseva+One&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Film grain overlay (sits above background, below content) -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <main class="page">
+    <!-- ========== HERO ========== -->
+    <section class="hero" id="hero">
+      <div class="hero-content">
+        <p class="eyebrow">est. somewhere between Cadbury &amp; coins</p>
+        <h1 class="title">Inflation Time Machine 🕰️</h1>
+        <p class="subtitle">What was your ₹10 really worth?</p>
+
+        <form class="year-form" id="year-form" novalidate>
+          <label class="year-label" for="birth-year">Your birth year</label>
+          <div class="input-row">
+            <input
+              type="number"
+              id="birth-year"
+              name="birth-year"
+              inputmode="numeric"
+              placeholder="e.g. 1995"
+              min="1950"
+              max="2021"
+              required
+              autocomplete="bday-year"
+              aria-describedby="year-error"
+            />
+            <button type="submit" class="ticket-btn" id="submit-btn">
+              <span class="ticket-btn__text">Take me back</span>
+              <span class="ticket-btn__stub" aria-hidden="true">🎟</span>
+            </button>
+          </div>
+          <p class="year-error" id="year-error" role="alert" hidden>
+            hmm, that doesn't look like a year we remember 🤔
+          </p>
+        </form>
+
+        <p class="disclaimer hero-disclaimer">
+          Approximate / illustrative estimate using ~6% average Indian CPI —
+          not financial advice.
+        </p>
+      </div>
+    </section>
+
+    <!-- ========== RESULTS (revealed after submit) ========== -->
+    <section class="results" id="results" hidden aria-live="polite">
+      <div class="results-inner">
+        <p class="results-kicker" id="results-kicker">Rewinding the rupee…</p>
+
+        <div class="cards">
+          <!-- Card 1: childhood pocket money in today's ₹ -->
+          <article class="poster-card poster-card--left" id="card-past">
+            <div class="poster-card__pin" aria-hidden="true"></div>
+            <p class="poster-card__label">Then → Now</p>
+            <h2 class="poster-card__title">
+              Your ₹10 pocket money =<br />
+              <span class="rupee-line">₹<span class="count-up" id="value-past" data-target="0">0</span> today</span>
+            </h2>
+            <p class="poster-card__meta" id="meta-past"></p>
+            <p class="poster-card__caption" id="caption-past"></p>
+          </article>
+
+          <!-- Card 2: ₹100 today when they turn 40 -->
+          <article class="poster-card poster-card--right" id="card-future">
+            <div class="poster-card__pin" aria-hidden="true"></div>
+            <p class="poster-card__label">Now → 40</p>
+            <h2 class="poster-card__title" id="future-title">
+              ₹100 today will be worth<br />
+              <span class="rupee-line">₹<span class="count-up" id="value-future" data-target="0">0</span> when you turn 40</span>
+            </h2>
+            <p class="poster-card__meta" id="meta-future"></p>
+            <p class="poster-card__caption" id="caption-future"></p>
+          </article>
+        </div>
+
+        <!-- Postcard-style share note -->
+        <aside class="postcard" id="share-note">
+          <p class="postcard__stamp" aria-hidden="true">✉</p>
+          <p class="postcard__text">
+            Screenshot your number &amp; share it with someone who still remembers
+            the price of a Frooti. Time machines work better together.
+          </p>
+        </aside>
+
+        <p class="disclaimer results-disclaimer">
+          Figures use a simple compound formula at ~6% avg. Indian CPI.
+          Fun estimates only — not financial advice.
+        </p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p class="footer__credit">
+        <span class="footer__icon" aria-hidden="true">📼</span>
+        Inflation Time Machine · made for nostalgia, not for portfolios
+        <span class="footer__icon" aria-hidden="true">🎟</span>
+      </p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,567 @@
+/* ============================================================
+   Inflation Time Machine — styles
+   Tweak colors / rates-adjacent UI tokens in :root below.
+   ============================================================ */
+
+:root {
+  /* --- Palette pulled from the vintage street scene --- */
+  --mustard: #d4a017;
+  --mustard-soft: #e8c56a;
+  --terracotta: #c45c26;
+  --faded-red: #a63d2f;
+  --dusty-pink: #c98b8b;
+  --teal: #2a6f6f;
+  --teal-deep: #1a4a4a;
+  --paper: #f3e6c8;
+  --paper-aged: #e8d5a8;
+  --ink: #2c1810;
+  --ink-soft: #5a3d2e;
+  --shadow-warm: rgba(60, 30, 10, 0.45);
+  --gold-glow: rgba(212, 160, 23, 0.35);
+
+  /* --- Typography --- */
+  --font-display: "Yeseva One", "Times New Roman", serif;
+  --font-body: "Merriweather", Georgia, serif;
+  --font-mono: "Special Elite", "Courier New", monospace;
+
+  /* --- Layout --- */
+  --max: 920px;
+  --radius-poster: 14px 18px 12px 16px; /* slightly imperfect */
+
+  /* --- Motion --- */
+  --ease-press: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --ease-slide: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------- Reset / base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.55;
+  /* Soft warm wash under the photo so gaps never flash white */
+  background-color: #3a2214;
+
+  /* ============================================================
+     BACKGROUND IMAGE — plug your path in here
+     Default: assets/background.png (already copied for you)
+     Swap to any relative path, e.g. url("my-street.jpg")
+     ============================================================ */
+  background-image:
+    /* soft dark gradient at bottom for text readability */
+    linear-gradient(
+      to top,
+      rgba(28, 14, 8, 0.88) 0%,
+      rgba(40, 20, 10, 0.45) 28%,
+      rgba(60, 30, 12, 0.18) 55%,
+      rgba(80, 45, 20, 0.08) 100%
+    ),
+    /* faint warm sun wash so the photo stays golden, not grey */
+    linear-gradient(
+      160deg,
+      rgba(212, 140, 40, 0.22) 0%,
+      transparent 45%,
+      rgba(42, 80, 80, 0.12) 100%
+    ),
+    url("assets/background.png");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* ---------- Film grain overlay ---------- */
+.grain {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  opacity: 0.18;
+  mix-blend-mode: multiply;
+  /* CSS noise — no extra PNG needed */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 180px 180px;
+}
+
+.page {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.25rem 4rem;
+}
+
+.hero-content {
+  width: 100%;
+  max-width: 640px;
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+  color: var(--mustard-soft);
+  text-shadow: 0 1px 2px var(--shadow-warm);
+}
+
+.title {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: #fff8e7;
+  text-shadow:
+    2px 3px 0 rgba(80, 30, 10, 0.35),
+    0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.subtitle {
+  margin: 0 0 2rem;
+  font-family: var(--font-mono);
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: var(--paper);
+  text-shadow: 0 2px 8px var(--shadow-warm);
+}
+
+/* ---------- Year form ---------- */
+.year-form {
+  margin: 0 auto;
+  max-width: 420px;
+}
+
+.year-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--mustard-soft);
+  text-align: left;
+}
+
+.input-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: stretch;
+  justify-content: center;
+}
+
+#birth-year {
+  flex: 1 1 160px;
+  min-width: 0;
+  padding: 0.85rem 1rem;
+  border: 3px solid var(--ink);
+  border-radius: 10px 12px 9px 11px;
+  background:
+    linear-gradient(180deg, #fff9eb 0%, var(--paper) 100%);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    3px 4px 0 rgba(40, 20, 10, 0.25);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#birth-year::placeholder {
+  color: rgba(90, 61, 46, 0.45);
+}
+
+#birth-year:focus {
+  border-color: var(--teal);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    3px 4px 0 rgba(42, 111, 111, 0.3),
+    0 0 0 3px rgba(42, 111, 111, 0.2);
+}
+
+/* Hide number spinners */
+#birth-year::-webkit-outer-spin-button,
+#birth-year::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+#birth-year[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* Ticket-stub button */
+.ticket-btn {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: stretch;
+  padding: 0;
+  border: 3px solid var(--ink);
+  border-radius: 6px 4px 7px 5px;
+  background: var(--terracotta);
+  color: #fff8e7;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: 4px 5px 0 rgba(40, 20, 10, 0.4);
+  transition: transform 0.12s var(--ease-press), box-shadow 0.12s ease, background 0.15s ease;
+  overflow: hidden;
+}
+
+.ticket-btn__text {
+  display: flex;
+  align-items: center;
+  padding: 0.85rem 1.1rem;
+  border-right: 2px dashed rgba(44, 24, 16, 0.35);
+}
+
+.ticket-btn__stub {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.7rem;
+  background: var(--mustard);
+  color: var(--ink);
+  font-size: 1rem;
+}
+
+.ticket-btn:hover {
+  background: #d4682e;
+  transform: translateY(-2px);
+  box-shadow: 5px 7px 0 rgba(40, 20, 10, 0.4);
+}
+
+.ticket-btn:active {
+  transform: translateY(3px) translateX(1px);
+  box-shadow: 1px 1px 0 rgba(40, 20, 10, 0.35);
+}
+
+.ticket-btn:focus-visible {
+  outline: 3px solid var(--mustard-soft);
+  outline-offset: 3px;
+}
+
+/* Friendly inline error — warm, not alarming */
+.year-error {
+  margin: 0.75rem 0 0;
+  padding: 0.55rem 0.85rem;
+  border-radius: 8px;
+  background: rgba(243, 230, 200, 0.88);
+  border: 2px dashed var(--dusty-pink);
+  color: var(--ink-soft);
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  text-align: left;
+}
+
+.year-error[hidden] {
+  display: none;
+}
+
+.disclaimer {
+  margin: 1.25rem 0 0;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  color: rgba(243, 230, 200, 0.72);
+  font-family: var(--font-body);
+}
+
+.hero-disclaimer {
+  max-width: 380px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ---------- Results ---------- */
+.results {
+  padding: 0 1.25rem 3rem;
+}
+
+.results[hidden] {
+  display: none;
+}
+
+.results.is-visible {
+  display: block;
+  animation: resultsIn 0.7s var(--ease-slide) both;
+}
+
+@keyframes resultsIn {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.results-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.results-kicker {
+  margin: 0 0 1.25rem;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--mustard-soft);
+  text-shadow: 0 1px 4px var(--shadow-warm);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+/* Poster / postcard cards */
+.poster-card {
+  position: relative;
+  padding: 1.6rem 1.4rem 1.4rem;
+  border: 3px solid var(--ink);
+  border-radius: var(--radius-poster);
+  /* Paper-like layered wash — feels pasted on a wall */
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(255, 250, 230, 0.55) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 80%, rgba(196, 92, 38, 0.08) 0%, transparent 40%),
+    linear-gradient(165deg, #fff8e4 0%, var(--paper) 40%, var(--paper-aged) 100%);
+  box-shadow:
+    6px 8px 0 rgba(40, 20, 10, 0.28),
+    inset 0 0 40px rgba(180, 120, 60, 0.08);
+  /* subtle paper grain */
+  background-blend-mode: normal;
+}
+
+.poster-card::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(90, 61, 46, 0.18);
+  border-radius: 8px 10px 7px 9px;
+  pointer-events: none;
+}
+
+.poster-card--left {
+  transform: rotate(-1.4deg);
+}
+
+.poster-card--right {
+  transform: rotate(1.2deg);
+}
+
+.poster-card__pin {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  margin-left: -7px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #e8c56a, var(--terracotta) 60%, #6b2a18);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.35);
+  z-index: 2;
+}
+
+.poster-card__label {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+
+.poster-card__title {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 2.4vw, 1.45rem);
+  font-weight: 400;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.rupee-line {
+  display: inline-block;
+  margin-top: 0.35rem;
+  color: var(--faded-red);
+  font-size: 1.15em;
+}
+
+.poster-card__meta {
+  margin: 0 0 0.85rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+
+.poster-card__caption {
+  margin: 0;
+  padding-top: 0.75rem;
+  border-top: 1px dashed rgba(90, 61, 46, 0.3);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-style: italic;
+  color: var(--ink-soft);
+  line-height: 1.45;
+}
+
+/* Postcard share note */
+.postcard {
+  position: relative;
+  margin: 2rem auto 0;
+  max-width: 520px;
+  padding: 1.25rem 1.5rem 1.25rem 1.75rem;
+  border: 2px solid var(--ink);
+  border-radius: 4px 14px 6px 12px;
+  background:
+    linear-gradient(90deg, rgba(42, 111, 111, 0.08) 0 28%, transparent 28%),
+    linear-gradient(180deg, #f7ebcf, #e9d4a6);
+  transform: rotate(-0.6deg);
+  box-shadow: 4px 5px 0 rgba(40, 20, 10, 0.25);
+  animation: postcardIn 0.8s var(--ease-slide) 0.25s both;
+}
+
+@keyframes postcardIn {
+  from {
+    opacity: 0;
+    transform: rotate(-0.6deg) translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(-0.6deg) translateY(0);
+  }
+}
+
+.postcard__stamp {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.75rem;
+  margin: 0;
+  font-size: 1.4rem;
+  opacity: 0.75;
+}
+
+.postcard__text {
+  margin: 0;
+  padding-right: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+.results-disclaimer {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  margin-top: auto;
+  padding: 1.5rem 1.25rem 2rem;
+  text-align: center;
+}
+
+.footer__credit {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: rgba(243, 230, 200, 0.7);
+}
+
+.footer__icon {
+  margin: 0 0.35rem;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 720px) {
+  body {
+    /* fixed backgrounds can jank on mobile — keep cover, drop fixed */
+    background-attachment: scroll;
+  }
+
+  .hero {
+    min-height: auto;
+    padding-top: 3.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .poster-card--left {
+    transform: rotate(-0.8deg);
+  }
+
+  .poster-card--right {
+    transform: rotate(0.9deg);
+  }
+
+  .input-row {
+    flex-direction: column;
+  }
+
+  .ticket-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .ticket-btn__text {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+/* Landscape / laptop screen-recording friendly */
+@media (min-width: 900px) and (min-height: 600px) {
+  .hero-content {
+    max-width: 680px;
+  }
+
+  .title {
+    font-size: 3.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .results.is-visible,
+  .postcard,
+  .ticket-btn {
+    animation: none;
+    transition: none;
+  }
+}
